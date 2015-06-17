@@ -1,5 +1,4 @@
 # team-wink
----
 
 ###Team Members
 - Dan Sirucek
