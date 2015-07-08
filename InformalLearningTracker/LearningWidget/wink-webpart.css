@@ -1,0 +1,85 @@
+﻿/*
+	wink.css
+*/
+
+.xapi-widget{
+	display: none;
+	padding: 0;
+	z-index: 100;
+	opacity: 1;
+}
+.xapi-widget #btnXapiSelfReport{
+	padding-left: 0;
+	margin-bottom: 0;
+	margin-left: 0;
+}
+.xapi-widget.xapi-dialog{
+	width: 400px;
+	display:none;
+}
+.xapi-widget.xapi-dialog .xapi-widget-header{
+	padding-left: 5px;
+}
+.xapi-widget.xapi-dialog div.xapi-widget-content{
+	padding: 10px;
+	width: 400px;
+}
+.xapi-widget.xapi-dialog div.xapi-widget-content p{
+	margin: 0;
+}
+.xapi-widget.xapi-dialog div.xapi-widget-content label{
+	display: inline-block;
+	font-weight: bold;
+	margin: 0 0 .5em;
+	width: 70px;
+}
+.xapi-widget.xapi-dialog div.xapi-widget-content label.wink-rb{
+	display: inline;
+	font-weight: normal;
+}
+.xapi-widget.xapi-dialog .xapi-widget-content input[type="button"]{
+	padding: 2px 5px;
+	margin-right: 1px;
+	margin-left: 9px;
+}
+
+#rptWinkData{
+	padding: 3px 0;
+}
+#winkMessage{
+	padding: 0 3px 3px 3px;
+}
+
+#tblLRSData, #frmXapiDetail{
+	display:none;
+}
+#tblLRSData td, #tblLRSData th{
+	padding: 2px;
+}
+#tblLRSData th{
+	cursor: pointer;
+}
+ul.pager{
+	text-align: left;
+}
+ul.pager, ul.pager li{
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+ul.pager li{
+	display:inline-block;
+}
+ul.pager li a{
+	display:inline-block;
+	padding: 2px 5px;
+}
+ul.pager a.disabled{
+	visibility: hidden;
+}
+ul.pager .xapi-widget-page-cnt{
+	padding: 2px 0 0 10px;
+}
+.xapi-link-detail{
+	float: right;
+}

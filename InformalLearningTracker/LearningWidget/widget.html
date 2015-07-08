@@ -1,0 +1,146 @@
+﻿	<script type="text/javascript" src="/_layouts/15/sp.js"></script>
+	<script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/tincan-min.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/xapiwrapper.min.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/xapidashboard.min.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/xapicollection.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/knockout-3.3.0.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/WinkApp/wink-app.js"></script>
+	<script type="text/javascript" src="/xapi/Webparts/LearningWidget/wink-webpart.js"></script>
+	<link rel="stylesheet" href="/xapi/Webparts/LearningWidget/wink-webpart.css" />
+	<!--
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/tincan-min.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/xapiwrapper.min.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/xapidashboard.min.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/xapicollection.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/knockout-3.3.0.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/WinkApp/wink-app.js"></script>
+	<script type="text/javascript" src="/teams/lti/experiment/xapi/Webparts/LearningWidget/wink-webpart.js"></script>
+	<link rel="stylesheet" href="/teams/lti/experiment/xapi/Webparts/LearningWidget/wink-webpart.css" />
+	-->
+	<div id="xapiWidget">
+		<div class="ms-list-addnew ms-textLarge ms-soften">
+			<a id="btnAddStatement" href="#" title="Add a new learning experience to your history." class="ms-heroCommandLink js-callout-launchPoint">
+				<span class="ms-list-addnew-imgSpan16">
+					<img src="/_layouts/15/images/spcommon.png?rev=23" class="ms-list-addnew-img16" border="0" />
+				</span><span>new learning experience</span>
+			</a>
+		</div>
+		<!--
+		<button type="button" id="btnAddStatement" class="ms-qcb-button js-listview-qcbNewButton ms-textLarge ms-heroCommandLink " title="Add a new learning experience to your history." role="button" aira-expanded="false" accesskey="n">
+			<span class="ms-list-addnew-imgSpan16"><img id="js-newdocWOPI-Hero-WPQ4-img" src="/_layouts/15/images/spcommon.png?rev=23" class="ms-list-addnew-img16" />new learning experience</span>
+			<span class="ms-qcb-glyph ms-listview-glyph ms-listview-old-new-glyph ms-listview-old-new-glyph-circle "></span>new learning experience<span class="ms-qcb-glyph  "></span>
+		</button>
+		-->
+		<div id="frmXapiDialog" class="xapi-widget xapi-dialog ms-dlgBorder ms-dlgContent">
+			<h4 class="xapi-widget-header ms-dlg-heading ">Wink: Self-Reported Informal Learning</h4>
+			<div id="xapi-content" class="xapi-widget-content ">
+				<p>Hi <span id="txtUserName"></span>, what have you done on this page?</p>
+				<p>
+					<label for="verb" class="ms-formlabel">Action:</label>
+					<select id="verb" class="ms-fb-select" data-bind="foreach: verbs">
+						<option data-bind="text: label, attr: {value: value}"></option>
+					</select>
+				</p>
+				<p class="wink-radio-tgl">
+					<label for="rating" class="ms-formlabel">Rating:</label>
+					<!---
+					<label class="wink-rb">1 <input type="radio" id="rating-1" name="rating" value="1" /></label>
+					<label class="wink-rb">2 <input type="radio" id="rating-2" name="rating" value="2" /></label>
+					<label class="wink-rb">3 <input type="radio" id="rating-3" name="rating" value="3" /></label>
+					<label class="wink-rb">4 <input type="radio" id="rating-4" name="rating" value="4" /></label>
+					<label class="wink-rb">5 <input type="radio" id="rating-5" name="rating" value="5" /></label>
+					-->
+					<select id="rating" class="ms-fb-select">
+						<option value=""></option>
+						<option value="5">5</option>
+						<option value="4">4</option>
+						<option value="3" selected="selected">3</option>
+						<option value="2">2</option>
+						<option value="1">1</option>
+					</select>
+				</p>
+				<p>
+					<label></label><input type="button" id="btnSave" value="Save" class="ms-dd-button" />
+					<input type="button" id="btnCancel" value="Cancel" class="ms-dd-button" />
+				</p>
+			</div>
+			<div id="xapi-preview"></div>
+		</div>
+		<div id="frmXapiDetail" class="xapi-widget xapi-dialog ms-dlgBorder ms-dlgContent" data-bind="with:selectedStatement">
+			<h4 class="xapi-widget-header ms-dlg-heading ">Learning Experience Detail</h4>
+			<div class="xapi-widget-content">
+				<p>
+					<label>Name:</label>
+					<span data-bind="text: actorName"></span>
+				</p>
+				<p>
+					<label>Email:</label>
+					<span data-bind="text: actorEmail"></span>
+				</p>
+				<p>
+					<label>Action:</label>
+					<span data-bind="text: verb"></span>
+				</p>
+				<p>
+					<label>Activty:</label>
+					<a href="#" target="_blank" class="ms-link" data-bind="attr: {href: objectUri}, text: objectName"></a>
+				</p>
+				<p>
+					<label>When:</label>
+					<span data-bind="text: timestampFmt"></span>
+				</p>
+				<p>
+					<label></label><input type="button" id="btnClose" value="Close" class="ms-dd-button" data-bind="click: $parent.closeStatement" />
+				</p>
+			</div>
+		</div>
+		<div id="rptWinkData">
+			<div id="winkMessage">Loading user</div>
+			<table id="tblLRSData" class="ms-listviewtable" cellpadding="0" cellspacing="0" border="0" style="width: 100%;">
+				<thead>
+					<tr data-bind="foreach: headers">
+						<th data-bind="click: $parent.sort, text: title"></th>
+					</tr>
+				</thead>
+				<tbody data-bind="foreach: pagedItems">
+					<tr class="ms-itmHoverEnabled ms-itmhover">
+						<td class="ms-cellstyle" style="width:75px; vertical-align:top;" data-bind="text: verb"></td>
+						<td class="ms-cellstyle">
+							<a href="#" title="Open experience detail" class="xapi-link-detail ms-lstItmLinkAnchor ms-ellipsis-a" data-bind="click:$parent.selectStatement"><img class="ms-ellipsis-icon" src="/_layouts/15/images/spcommon.png?rev=23" alt="Open Detail" /></a>
+							<a href="#" target="_blank" class="ms-link" data-bind="attr: {href: objectUri}, text: objectName"></a>
+						</td>
+						<td class="ms-cellstyle" style="width:45px; text-align: center; vertical-align:top;" data-bind="text: rating"></td>
+						<td class="ms-cellstyle" style="width:75px; vertical-align:top;">
+							<span title="" data-bind="attr: {title: timestampFmt}, text: datestamp"></span>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<ul class="pager">
+								<li class="ms-vb">
+									<a href="#" class="ms-link" data-bind="click: firstPage, css: {'disabled': !previousPageEnabled()}">First</a>
+								</li>
+								<li class="ms-vb">
+									<a href="#" class="ms-link" data-bind="click: previousPage, css: {'disabled': !previousPageEnabled()}">Previous</a>
+								</li>
+								<li class="ms-vb">
+									<a href="#" class="ms-link" data-bind="click: nextPage, css: {'disabled': !nextPageEnabled()}">Next</a>
+								</li>
+								<li class="ms-vb">
+									<a href="#" class="ms-link" data-bind="click: lastPage, css: {'disabled': !nextPageEnabled()}">Last</a>
+								</li>
+								<li class="xapi-widget-page-cnt">
+									Page <span data-bind="text: currentPage()"></span> of <span data-bind="text: maxPageIndex()"></span>
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
